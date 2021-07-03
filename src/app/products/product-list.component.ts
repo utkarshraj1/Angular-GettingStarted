@@ -10,6 +10,7 @@ export class ProductListComponent implements OnInit {
 
   //Properties
   pageTitle: string = "Product List";
+  starValue: string = ""
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
@@ -87,6 +88,9 @@ export class ProductListComponent implements OnInit {
     return this.products.filter(
       (product: IProduct) => product.productName.toLocaleLowerCase().includes(value)
     );
+  }
+  starClickEvent(value: string): void {
+    this.starValue = value;
   }
   ngOnInit(): void {
     console.log("ngOnInIt method, to be used later");

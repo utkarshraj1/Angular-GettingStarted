@@ -2,6 +2,9 @@
     <div class="card-header">
         {{pageTitle}}
     </div>
+    <div class="card-header">
+        The star value is : {{starValue}}
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-2">Filter by:</div>
@@ -48,7 +51,9 @@
                         <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
                         <!-- <td>{{product.starRating}}</td> -->
                         <td>
-                            <pm-star [rating]='product.starRating'></pm-star>
+                            <pm-star [rating]='product.starRating'
+                                     (clickedRating)='starClickEvent($event)'>
+                            </pm-star>
                         </td>
                     </tr>
                 </tbody>
