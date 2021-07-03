@@ -9,7 +9,7 @@ import { IProduct } from "./product";
 export class ProductListComponent implements OnInit {
 
   //Properties
-  pageTitle: string = "Products List";
+  pageTitle: string = "Product List";
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
