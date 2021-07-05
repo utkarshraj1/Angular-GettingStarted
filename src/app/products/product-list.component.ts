@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 import { IProduct } from "./product";
 import { ProductService } from "./product.service";
 
@@ -7,7 +8,7 @@ import { ProductService } from "./product.service";
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
 
   //Properties
   pageTitle: string = "Product List";
@@ -19,6 +20,8 @@ export class ProductListComponent implements OnInit {
   private _filterValue: string = '';
   products: IProduct[] = [];
   filteredProducts: IProduct[] = [];
+  errorMessage: string = '';
+  subStatus!: Subscription;
 
   //Constructor
   constructor(private productService: ProductService) {
@@ -56,7 +59,18 @@ export class ProductListComponent implements OnInit {
   //Lifecycle Hooks
   ngOnInit(): void {
     //console.log("ngOnInIt method, to be used later");
-    this.products = this.productService.getProducts();
+    this.subStatus = this.productService.getProducts().subscribe({
+      next: p => {
+        this.products = p;
+        this.filteredProducts = this.products;
+      },
+      error: err => this.errorMessage = err
+    });
     this.filteredProducts = this.products;
+  }
+  ngOnDestroy(): void {
+    //Unsubscribing when we close this component.
+    console.log("OnDestroy Life cycle hook came.");
+    this.subStatus.unsubscribe();
   }
 }
