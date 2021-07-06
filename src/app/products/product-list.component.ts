@@ -4,7 +4,7 @@ import { IProduct } from "./product";
 import { ProductService } from "./product.service";
 
 @Component({
-  selector: 'pm-products',
+  // selector: 'pm-products',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
   /*Above code is the shorthand technique of :
   private _productService;
-  constructor(productService: ProductService) {
+  constructor(_productService: ProductService) {
     this._productService = productService;
   }
   */
